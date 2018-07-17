@@ -1,0 +1,29 @@
+{
+  "name": "awsm-backend",
+  "version": "1.0.0",
+  "description": "Backend for TeamAwsm",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamAwsom/awsm-backend.git"
+  },
+  "author": "TeamAwsm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeamAwsom/awsm-backend/issues"
+  },
+  "homepage": "https://github.com/TeamAwsom/awsm-backend#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.3"
+  }
+}
