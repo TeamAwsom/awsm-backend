@@ -7,6 +7,12 @@
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
 
+# Google Calendar Token
+token.json
+
+# Google Calendar Credentials
+credentials.json
+
 # KDE directory preferences
 .directory
 
