@@ -25,3 +25,13 @@ const server = require('./lib/server.js');
 server.start();
 server.stop();
 ```
+
+### CalendarAPI
+
+To use the calendarAPI.js do the following:
+
+1.  Visit https://developers.google.com/calendar/quickstart/nodejs and under Step 1 click the "ENABLE THE GOOGLE CALENDAR API" button. This opens a new dialog. In the dialog, do the following:
+  1. Select + Create a new project.
+  2. Enter a name for the project and product, ensuring not to use the word "Google", as it's a reserved word.
+  3. Download the configuration file.
+2. Move the downloaded file to your working directory.
