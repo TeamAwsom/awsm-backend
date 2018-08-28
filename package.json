@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,11 +22,13 @@
   "homepage": "https://github.com/TeamAwsom/awsm-backend#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "googleapis": "^27.0.0",
-    "mongoose": "^5.2.3"
+    "mongoose": "^5.2.3",
+    "superagent": "^3.8.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -36,6 +39,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.10.0",
+    "jest": "^23.5.0",
     "prettier": "^1.14.0"
   }
 }
