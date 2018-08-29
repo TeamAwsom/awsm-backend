@@ -1,7 +1,6 @@
-'use strict'
+const mongoose = require('mongoose');
 
-const mongoose = require ('mongoose');
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const studentSchema = Schema ({
 
@@ -9,7 +8,7 @@ const studentSchema = Schema ({
   studentName: { type: String, required: true },
   email: { type: String, required: true },
   address: { type: String, required: true },
-  phone:  { type: String, required: true },
+  phone: { type: String, required: true },
   birthDate: { type: Date, required: true },
   availability: { type: Date, required: true },
   instrument: { type: String, required: true },
@@ -20,5 +19,3 @@ const studentSchema = Schema ({
 });
 
 module.exports = mongoose.model('student', studentSchema);
-
-
