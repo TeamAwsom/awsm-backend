@@ -19,27 +19,34 @@ const Company = require('../model/student.js');
 
 const studentRouter = module.exports = Router();
 
-studentRouter.post('/api/teacher/:teacherId/createStudent', jsonParser, function (req, res, next) {
-  debug('POST: /api/teacher/:teacherId/createStudent');
+studentRouter.post('/api/createStudent', jsonParser, function (req, res, next) {
+  debug('POST: /api/createStudent');
   if (!req.body.studentName) return next(createError(400, 'bad request'));
 
-  Teacher.findByIdAndAddstudent(req.params.teacherId, req.body)
+  // Teacher.findByIdAndAddstudent(req.params.teacherId, req.body)
+  //   .then(student => {
+  //     if (req.params.teacherId === student.teacherId.toString()) res.json(student);
+  //   })
+  //   .catch(next);
+
+  // write method that doesn't depend on teacher
+  return new Student(req.body).save()
     .then(student => {
-      if (req.params.teacherId === student.teacherId.toString()) res.json(student);
+      return res.json(student)
     })
     .catch(next);
 });
 
-studentRouter.post('/api/teacher/:teacherId/student', jsonParser, function (req, res, next) {
-  debug('POST: /api/student');
-  if (!req.body.studentName) return next(createError(400, 'bad request'));
+// studentRouter.post('/api/teacher/:teacherId/student', jsonParser, function (req, res, next) {
+//   debug('POST: /api/student');
+//   if (!req.body.studentName) return next(createError(400, 'bad request'));
 
-  Teacher.findByIdAndAddstudent(req.params.teacherId, req.body)
-    .then(student => {
-      if (req.params.teacherId === student.teacherId.toString()) res.json(student);
-    })
-    .catch(next);
-});
+//   Teacher.findByIdAndAddstudent(req.params.teacherId, req.body)
+//     .then(student => {
+//       if (req.params.teacherId === student.teacherId.toString()) res.json(student);
+//     })
+//     .catch(next);
+// });
 
 studentRouter.put('/api/teacher/:teacherId/student/:studentId', jsonParser, function (req, res, next) {
   debug('PUT: /api/student/:studentId');
