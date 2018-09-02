@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/TeamAwsom/awsm-backend#readme",
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "bluebird": "^3.5.1",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
