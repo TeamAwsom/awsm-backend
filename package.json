@@ -26,9 +26,14 @@
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+<<<<<<< HEAD
+    "googleapis": "^32.0.0",
+    "mongoose": "^5.2.3"
+=======
     "googleapis": "^27.0.0",
     "mongoose": "^5.2.3",
     "superagent": "^3.8.3"
+>>>>>>> 95bc2708037a98f593da3bacd092abdb2e34aeb4
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
