@@ -8,6 +8,11 @@ const teacherSchema = Schema({
   email: { type: String, required: true },
   address: { type: String, required: true },
   availability: { type: Date, required: true },
+  students: [{ type: Schema.Types.ObjectId, ref: 'student' }],
 });
 
-module.exports = mongoose.model('teacher', teacherSchema);
+const Teacher = module.exports = mongoose.model('teacher', teacherSchema);
+
+Teacher.findbyIdandAddStudent = function(id, student) {
+  
+}

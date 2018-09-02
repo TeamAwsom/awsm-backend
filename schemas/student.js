@@ -2,18 +2,20 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const studentSchema = Schema({
-  name: { type: String, required: true },
-  studentName: { type: String, required: true },
-  email: { type: String, required: true },
+const studentSchema = Schema ({
+
+  name: { type: String},
+  studentName: { type: String},
+  email: { type: String},
   address: { type: String, required: true },
-  phone: { type: String, required: true },
-  birthDate: { type: Date, required: true },
+  phone: { type: String},
+  birthDate: { type: Date},
   availability: { type: Date, required: true },
   instrument: { type: String, required: true },
   comments: { type: String, required: true },
-  hearAbout: { type: String, required: true },
+  hearAbout: { type: String},
   experienceLevel: { type: String, required: true },
+  teacherId: { type: Schema.Types.ObjectId},
 });
 
 module.exports = mongoose.model('student', studentSchema);
