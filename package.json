@@ -21,12 +21,13 @@
   },
   "homepage": "https://github.com/TeamAwsom/awsm-backend#readme",
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
-    "googleapis": "^27.0.0",
+    "googleapis": "^32.0.0",
     "mongoose": "^5.2.3",
     "superagent": "^3.8.3"
   },
