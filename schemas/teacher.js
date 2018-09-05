@@ -7,7 +7,7 @@ const teacherSchema = Schema({
   phone: { type: String, required: true },
   email: { type: String, required: true },
   address: { type: String, required: true },
-  availability: { type: Date, required: true },
+  availability: [{ day: { type: String }, fromTime: { type: Number }, toTime: { type: Number } }],
   students: [{ type: Schema.Types.ObjectId, ref: 'student' }],
 });
 
