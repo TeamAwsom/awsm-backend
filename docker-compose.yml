@@ -2,16 +2,15 @@ version: '3'
 
 services:
 
-  mongodb:
+  awsom-mongo:
     image: mongo:3.6.2
     volumes:
-      -awsom-data:/data/db
+      - awsom-data:/data/db
 
   api:
     build:
       context: .
       dockerfile: Dockerfile
-    # env_file: env
     volumes:
       - .:/api/app
       - /api/app/node_modules
@@ -19,7 +18,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mongodb
+      - awsom-mongo
 
 volumes:
   awsom-data:
