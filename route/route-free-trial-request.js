@@ -1,4 +1,5 @@
 const bodyParse = require('body-parser').json();
+const Student = require('./../schemas/student');
 
 module.exports = router => {
   router.post('*api/free-trial-request', bodyParse, (req, res) => {
@@ -7,6 +8,6 @@ module.exports = router => {
     if (!bodyParams.length) {
       return res.status(400).send('Bad Request body');
     }
-    return res.send('This is the response of the free-trial-request route');
+    return new Student(req.body).save().then(student => res.json(student));
   });
 };
