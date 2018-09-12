@@ -1,0 +1,23 @@
+{
+  "instrument": "piano",
+  "musicStyle": "classical",
+  "experienceLevel": 0,
+  "hasInstrument": false,
+  "address": "123 Fake Place Seattle, WA 98101",
+  "dayOfWeek": "Thursday",
+  "allergies": "none",
+  "specialNeeds": "none",
+  "comments": "I want to be heard!!!",
+  "availability": [
+    {
+      "day": "Monday",
+      "fromTime": 1800,
+      "toTime": 1900
+    },
+    {
+      "day": "Thursday",
+      "fromTime": 1800,
+      "toTime": 1900
+    }
+  ]
+}
