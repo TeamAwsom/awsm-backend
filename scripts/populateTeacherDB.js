@@ -84,7 +84,6 @@ const sampleTeachers = [
   },
 ];
 
-// utilize mongoose insert many to poplate teacher in DB, maybe create Array of teacher objects.
 Teacher.insertMany(sampleTeachers)
   .then(teachers => {
     console.log('Sample teachers loaded into the DB');
