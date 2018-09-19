@@ -4,15 +4,23 @@ const { Schema } = mongoose;
 
 const teacherSchema = Schema({
   name: { type: String, required: true },
-  phone: { type: String, required: true },
-  email: { type: String, required: true },
+  phone: { type: String },
+  email: { type: String, required: true, unique: true },
   address: { type: String, required: true },
-  availability: [{ day: { type: String }, fromTime: { type: Number }, toTime: { type: Number } }],
+  availability: [
+    {
+      day: { type: String },
+      fromTime: { type: Number },
+      toTime: { type: Number },
+    },
+  ],
   students: [{ type: Schema.Types.ObjectId, ref: 'student' }],
 });
 
-const Teacher = module.exports = mongoose.model('teacher', teacherSchema);
+const Teacher = mongoose.model('teacher', teacherSchema);
 
-Teacher.findbyIdandAddStudent = function(id, student) {
-  
-}
+Teacher.findbyIdandAddStudent = (id, student) => {
+  console.log('Function not yet implemented', id, student);
+};
+
+module.exports = Teacher;
