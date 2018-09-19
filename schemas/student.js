@@ -28,6 +28,7 @@ const studentSchema = Schema({
   comments: { type: String, required: true },
   hearAbout: { type: String },
   experienceLevel: { type: String, required: true },
+  hasCompletedReg: { type: Boolean, default: false },
   teacherId: { type: Schema.Types.ObjectId, ref: 'teacher' },
 });
 

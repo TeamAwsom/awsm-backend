@@ -11,6 +11,7 @@ const teacherSchema = Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: String, required: true },
+  instruments: [{ type: String }, { type: String }],
   availability: [
     {
       day: { type: String },
