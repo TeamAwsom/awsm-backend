@@ -6,7 +6,11 @@ const teacherSchema = Schema({
   name: { type: String, required: true },
   phone: { type: String },
   email: { type: String, required: true, unique: true },
-  address: { type: String, required: true },
+  addressOne: { type: String, required: true },
+  addressTwo: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  zip: { type: String, required: true },
   availability: [
     {
       day: { type: String },
