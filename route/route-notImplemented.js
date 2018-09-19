@@ -11,11 +11,10 @@ module.exports = router => {
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
 const createError = require('http-errors');
-// const debug = require('debug')('job-seeker: student-router');
 
 const Teacher = require('../model/teacher.js');
 const Company = require('../model/student.js');
-// cons = require('../lib/bearer-auth-middleware.js');
+
 
 const studentRouter = module.exports = Router();
 
@@ -23,13 +22,6 @@ studentRouter.post('/api/createStudent', jsonParser, function (req, res, next) {
   debug('POST: /api/createStudent');
   if (!req.body.studentName) return next(createError(400, 'bad request'));
 
-  // Teacher.findByIdAndAddstudent(req.params.teacherId, req.body)
-  //   .then(student => {
-  //     if (req.params.teacherId === student.teacherId.toString()) res.json(student);
-  //   })
-  //   .catch(next);
-
-  // write method that doesn't depend on teacher
   return new Student(req.body).save()
     .then(student => {
       return res.json(student)
@@ -64,7 +56,6 @@ studentRouter.put('/api/teacher/:teacherId/student/:studentId', jsonParser, func
     });
 });
 
-// studentRouter.get('/api/student/:studentId', function(req, res, next) {
 studentRouter.get('/api/teacher/:teacherId/student/:studentId', function (req, res, next) {
   debug('GET: /api/student/:studentId');
 
@@ -79,29 +70,3 @@ studentRouter.get('/api/teacher/:teacherId/student/:studentId', function (req, r
       next();
     });
 });
-
-// studentRouter.get('/api/teacher/:teacherId/student', function (req, res, next) {
-//   debug('GET: /api/teacher/:teacherId/student');
-
-//   Profile.findById(req.params.teacherId)
-//     .then(companies => {
-//       return res.json(companies);
-//     })
-//     .catch(err => next(createError(404, err.message)));
-// });
-
-// studentRouter.delete('/api/teacher/:teacherId/student/:studentId', function (req, res, next) {
-//   debug('DELETE: /api/teacher/:teacherId/student/:studentId');
-
-//   Profile.findByIdAndRemovestudent(req.params.teacherId, req.params.studentId)
-//     .then(teacher => {
-//       return teacher;
-//     })
-//     .then(() => {
-//       return student.findByIdAndRemove(req.params.studentId);
-//     })
-//     .then(() => {
-//       return res.sendStatus(204);
-//     })
-//     .catch(next);
-// });
