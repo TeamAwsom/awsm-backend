@@ -14,7 +14,11 @@ const sampleTeachers = [
   {
     name: 'Alex Bisky',
     email: 'rtnsjw@gmail.com',
-    address: '12209 NE 85th St, Kirkland, WA 98033',
+    addressOne: '12209 NE 85th St',
+    addressTwo: '',
+    city: 'Kirkland',
+    state: 'WA',
+    zip: '98033',
     availability: [
       {
         day: 'monday',
@@ -47,7 +51,11 @@ const sampleTeachers = [
   {
     name: 'Breana Truman',
     email: 'bb@gmail.com',
-    address: '2255 Carillon Point, Kirkland, WA 98033',
+    addressOne: '2255 Carillon Point',
+    addressTwo: '',
+    city: 'Kirkland',
+    state: 'WA',
+    zip: '98033',
     availability: [
       {
         day: 'monday',
@@ -85,7 +93,11 @@ const sampleTeachers = [
   {
     name: 'Peter Billings',
     email: 'petebills@gmail.com',
-    address: '19100 44th Ave W, Lynnwood, WA 98046',
+    addressOne: '19100 44th Ave W',
+    addressTwo: '',
+    city: 'Lynnwood',
+    state: 'WA',
+    zip: '98046',
     availability: [
       {
         day: 'monday',
@@ -123,7 +135,11 @@ const sampleTeachers = [
   {
     name: 'Susan Kentworth',
     email: 'suzie1986@gmail.com',
-    address: '220 Fourth Ave. S., Kent, WA 98032',
+    addressOne: '220 Fourth Ave. S.',
+    addressTwo: '',
+    city: 'Kent',
+    state: 'WA',
+    zip: '98032',
     availability: [
       {
         day: 'monday',
@@ -156,7 +172,11 @@ const sampleTeachers = [
   {
     name: 'Alma Luna-Mendez',
     email: 'soulmoon@gmail.com',
-    address: '9600 College Way N, Seattle, WA 98103',
+    addressOne: '9600 College Way N',
+    addressTwo: '',
+    city: 'Seattle',
+    state: 'WA',
+    zip: '98103',
     availability: [
       {
         day: 'monday',
@@ -197,9 +217,13 @@ const sampleTeachers = [
     students: [],
   },
   {
-    name: 'Alma Luna-Mendez',
-    email: 'soulmoon@gmail.com',
-    address: '9600 College Way N, Seattle, WA 98103',
+    name: 'Dan Dingleman',
+    email: 'dannyd@gmail.com',
+    addressOne: '1701 Broadway',
+    addressTwo: '',
+    city: 'Seattle',
+    state: 'WA',
+    zip: '98122',
     availability: [
       {
         day: 'monday',
