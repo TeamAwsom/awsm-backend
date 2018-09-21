@@ -6,7 +6,8 @@ module.exports = router => {
     const bodyParams = Object.keys(req.body);
     // Need to validate that bodyParams contains all required params
     if (!bodyParams.length) {
-      return res.status(400).send('Bad Request body');
+      // console.log('Body: ', bodyParams);
+      return res.status(400).send('Bad Request: Request must include body');
     }
     return new Student(req.body).save().then(student => res.json(student));
   });

@@ -1,23 +1,26 @@
 {
-  "instrument": "piano",
-  "musicStyle": "classical",
+  "instrument": "guitar",
+  "musicStyle": "modern",
   "experienceLevel": 0,
   "hasInstrument": false,
-  "address": "123 Fake Place Seattle, WA 98101",
+  "addressOne": "123 Fake Place Seattle",
+  "city": "Seattle",
+  "state": "WA",
+  "zip": "98101",
   "dayOfWeek": "Thursday",
   "allergies": "none",
   "specialNeeds": "none",
-  "comments": "I want to be heard!!!",
+  "comments": "none",
   "availability": [
     {
       "day": "Monday",
-      "fromTime": 1800,
-      "toTime": 1900
+      "fromTime": 18,
+      "toTime": 19
     },
     {
       "day": "Thursday",
-      "fromTime": 1800,
-      "toTime": 1900
+      "fromTime": 18,
+      "toTime": 19
     }
   ]
 }
