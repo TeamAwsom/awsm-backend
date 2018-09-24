@@ -1,6 +1,7 @@
 const bodyParse = require('body-parser').json();
 const Student = require('./../schemas/student');
 const Teacher = require('./../schemas/teacher');
+const makeAvailability = require('./../lib/makeAvailabilityObject');
 
 module.exports = router => {
   router.post('*api/free-trial-request', bodyParse, (req, res) => {
@@ -8,21 +9,23 @@ module.exports = router => {
     if (!bodyParams.length) {
       return res.status(400).send('Bad Request: Request must include body');
     }
-    let studentInfo = {};
-    let teacherInfo = {};
+
+    const postResponse = {};
+
     const {
       addressOne,
       city,
       state,
       zip,
       instrument,
-      // hasInstrument,
       musicStyle,
       allergies,
       specialNeeds,
       comments,
       experienceLevel,
     } = req.body;
+
+    const availability = makeAvailability(req.body.availability);
 
     if (
       !(
@@ -46,19 +49,18 @@ module.exports = router => {
     return new Student(req.body)
       .save()
       .then(student => {
-        studentInfo = student;
-        return studentInfo;
+        postResponse.studentID = student._id;
+        return null;
       })
       .then(() => Teacher.find({ instruments: { $in: [instrument] } }))
-      .then(teacher => {
-        console.log('Teacher: ', teacher);
-        teacherInfo = teacher;
-        return teacherInfo;
-      })
-      .then(monkey => {
-        console.log('Student: ', studentInfo);
-        // console.log('Teacher result: ', teacherInfo);
-        return res.json(studentInfo);
+      .then(teachers => {
+        console.log('Student availability: ', availability);
+        teachers.map(teacher =>
+          console.log(
+            `Teacher ${teacher.name}'s availability: ${teacher.availability}`
+          )
+        );
+        return res.json(postResponse);
       });
   });
 };
