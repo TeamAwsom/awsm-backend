@@ -6,11 +6,11 @@ describe('Testing the makeAvailabilityObj.js', () => {
     { day: 'Thursday', fromTime: 18, toTime: 19 },
   ];
   const result = {
-    Monday: {
+    monday: {
       fromTime: 18,
       toTime: 19,
     },
-    Thursday: {
+    thursday: {
       fromTime: 18,
       toTime: 19,
     },

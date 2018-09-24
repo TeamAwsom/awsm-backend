@@ -10,6 +10,7 @@ const Student = require('./../../schemas/student');
 const sample1 = require('./../sample/samplePost.json');
 const sample2 = require('./../sample/samplePostMissingAddress');
 const sample3 = require('./../sample/samplePostMissingHasIntrument.json');
+const sample4 = require('./../sample/samplePostMissingAvailability.json');
 require('jest');
 
 describe('Testing free-trial-request route', () => {
@@ -70,6 +71,18 @@ describe('Testing free-trial-request route', () => {
       .post(':5000/api/free-trial-request')
       .type('application/json')
       .send(sample3)
+      .catch(res => {
+        expect(res.response.text).toBe(
+          'Bad Request: Request body missing required properties'
+        );
+        expect(res.status).toBe(400);
+      }));
+
+  test('Making a POST call with body missing required property, availability', () =>
+    request
+      .post(':5000/api/free-trial-request')
+      .type('application/json')
+      .send(sample4)
       .catch(res => {
         expect(res.response.text).toBe(
           'Bad Request: Request body missing required properties'
