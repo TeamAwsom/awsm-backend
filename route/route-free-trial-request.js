@@ -3,6 +3,8 @@ const Student = require('./../schemas/student');
 const Teacher = require('./../schemas/teacher');
 const makeAvailability = require('./../lib/makeAvailabilityObject');
 const availableTeachers = require('./../lib/filterTeachersByAvailability');
+const createAddress = require('./../lib/createAddrString');
+const findDistance = require('./../lib/distanceMatrixAPI');
 
 module.exports = router => {
   router.post('*api/free-trial-request', bodyParse, (req, res) => {
@@ -49,6 +51,7 @@ module.exports = router => {
     }
 
     const studentAvailability = makeAvailability(availability);
+    let filteredTeachersArray = [];
 
     return new Student(req.body)
       .save()
@@ -56,7 +59,7 @@ module.exports = router => {
         postResponse.studentID = student._id;
         return null;
       })
-      .then(() => Teacher.find({ instruments: { $in: [instrument] } }))
+      .then(() => Teacher.find({ instruments: { $in: [instrument] } }).lean())
       .then(teachers => {
         if (!teachers.length) {
           console.log(
@@ -76,8 +79,32 @@ module.exports = router => {
           // need to handle this differently to send correct response.
           // Maybe throw an error and catch the error to send a custom response.
         }
-        console.log('Filtered Teachers array:\n', filteredTeachers);
+        filteredTeachersArray = filteredTeachers;
+        return filteredTeachers;
       })
+      .then(teachers => {
+        const destination = createAddress(req.body);
+        const response = teachers.map(async (teacher, idx) =>
+          findDistance(createAddress(teacher), destination)
+            .then(apiCall => {
+              filteredTeachersArray[idx].distance = apiCall.body;
+              return apiCall;
+            })
+            .then(call => {
+              console.log('Made successful api call');
+              return call;
+            })
+        );
+        const resultsArray = Promise.all(response);
+        return resultsArray;
+      })
+      .then(() =>
+        filteredTeachersArray.sort(
+          (a, b) =>
+            a.distance.rows[0].elements[0].distance.value -
+            b.distance.rows[0].elements[0].distance.value
+        )
+      )
       .then(() => res.json(postResponse));
   });
 };
