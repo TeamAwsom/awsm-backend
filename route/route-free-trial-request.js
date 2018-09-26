@@ -23,9 +23,6 @@ module.exports = router => {
       zip,
       instrument,
       musicStyle,
-      allergies,
-      specialNeeds,
-      comments,
       experienceLevel,
       availability,
     } = req.body;
@@ -38,9 +35,6 @@ module.exports = router => {
         zip &&
         instrument &&
         musicStyle &&
-        allergies &&
-        specialNeeds &&
-        comments &&
         experienceLevel &&
         availability &&
         'hasInstrument' in req.body
