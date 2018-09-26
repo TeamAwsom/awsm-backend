@@ -5,6 +5,7 @@ const makeAvailability = require('./../lib/makeAvailabilityObject');
 const availableTeachers = require('./../lib/filterTeachersByAvailability');
 const createAddress = require('./../lib/createAddrString');
 const findDistance = require('./../lib/distanceMatrixAPI');
+const createTimeSlot = require('./../lib/createTimeSlot');
 
 module.exports = router => {
   router.post('*api/free-trial-request', bodyParse, (req, res) => {
@@ -105,6 +106,14 @@ module.exports = router => {
             b.distance.rows[0].elements[0].distance.value
         )
       )
+      .then(sortedArray => {
+        postResponse.suggestedTimeSlots = [];
+        for (let i = 0; i < 3; i += 1) {
+          postResponse.suggestedTimeSlots.push(
+            createTimeSlot(sortedArray[i], studentAvailability)
+          );
+        }
+      })
       .then(() => res.json(postResponse));
   });
 };
