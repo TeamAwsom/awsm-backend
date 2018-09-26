@@ -9,17 +9,5 @@
   "zip": "98121",
   "allergies": "none",
   "specialNeeds": "none",
-  "comments": "none",
-  "availability": [
-    {
-      "day": "Monday",
-      "fromTime": 18,
-      "toTime": 19
-    },
-    {
-      "day": "Thursday",
-      "fromTime": 18,
-      "toTime": 19
-    }
-  ]
+  "comments": "none"
 }

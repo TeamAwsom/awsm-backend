@@ -3,7 +3,7 @@ version: '3'
 services:
 
   awsom-mongo:
-    image: mongo:3.6.2
+    image: mongo
     volumes:
       - awsom-data:/data/db
 
@@ -11,6 +11,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - .:/api/app
       - /api/app/node_modules

@@ -19,6 +19,7 @@ const sampleTeachers = [
     city: 'Kirkland',
     state: 'WA',
     zip: '98033',
+    instruments: ['Piano', 'Guitar', 'Trumpet'],
     availability: [
       {
         day: 'monday',
@@ -56,6 +57,7 @@ const sampleTeachers = [
     city: 'Kirkland',
     state: 'WA',
     zip: '98033',
+    instruments: ['Piano', 'Saxophone', 'Clarinet'],
     availability: [
       {
         day: 'monday',
@@ -98,6 +100,7 @@ const sampleTeachers = [
     city: 'Lynnwood',
     state: 'WA',
     zip: '98046',
+    instruments: ['Guitar', 'Bass Guitar', 'Fiddle'],
     availability: [
       {
         day: 'monday',
@@ -140,6 +143,7 @@ const sampleTeachers = [
     city: 'Kent',
     state: 'WA',
     zip: '98032',
+    instruments: ['Piano', 'Flute'],
     availability: [
       {
         day: 'monday',
@@ -177,6 +181,7 @@ const sampleTeachers = [
     city: 'Seattle',
     state: 'WA',
     zip: '98103',
+    instruments: ['Piano'],
     availability: [
       {
         day: 'monday',
@@ -224,6 +229,7 @@ const sampleTeachers = [
     city: 'Seattle',
     state: 'WA',
     zip: '98122',
+    instruments: ['Piano', 'Guitar', 'Didgeridoo'],
     availability: [
       {
         day: 'monday',
@@ -270,7 +276,9 @@ Teacher.insertMany(sampleTeachers)
     console.log('Sample teachers loaded into the DB');
     return teachers;
   })
-  .then(() => mongoose.disconnect())
+  .then(() => {
+    return mongoose.disconnect();
+  })
   .catch(err => {
     console.error(err);
     return mongoose.disconnect();
