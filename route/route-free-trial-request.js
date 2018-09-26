@@ -60,7 +60,9 @@ module.exports = router => {
         postResponse.studentID = student._id;
         return null;
       })
-      .then(() => Teacher.find({ instruments: { $in: [instrument] } }).lean())
+      .then(() => {
+        return Teacher.find({ instruments: { $in: [instrument] } }).lean();
+      })
       .then(teachers => {
         if (!teachers.length) {
           console.log(
@@ -85,8 +87,8 @@ module.exports = router => {
       })
       .then(teachers => {
         const destination = createAddress(req.body);
-        const response = teachers.map(async (teacher, idx) =>
-          findDistance(createAddress(teacher), destination)
+        const response = teachers.map(async (teacher, idx) => {
+          return findDistance(createAddress(teacher), destination)
             .then(apiCall => {
               filteredTeachersArray[idx].distance = apiCall.body;
               return apiCall;
@@ -94,18 +96,20 @@ module.exports = router => {
             .then(call => {
               console.log('Made successful api call');
               return call;
-            })
-        );
+            });
+        });
         const resultsArray = Promise.all(response);
         return resultsArray;
       })
-      .then(() =>
-        filteredTeachersArray.sort(
-          (a, b) =>
+      .then(() => {
+        console.log(filteredTeachersArray);
+        return filteredTeachersArray.sort((a, b) => {
+          return (
             a.distance.rows[0].elements[0].distance.value -
             b.distance.rows[0].elements[0].distance.value
-        )
-      )
+          );
+        });
+      })
       .then(sortedArray => {
         postResponse.suggestedTimeSlots = [];
         for (let i = 0; i < 3; i += 1) {
@@ -114,6 +118,8 @@ module.exports = router => {
           );
         }
       })
-      .then(() => res.json(postResponse));
+      .then(() => {
+        return res.json(postResponse);
+      });
   });
 };

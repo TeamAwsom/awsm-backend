@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "watch": "node_modules/.bin/nodemon index.js",
-    "test": "jest --coverage --detectOpenHandles --forceExit",
+    "test": "jest --verbose --coverage --detectOpenHandles --forceExit",
     "populateTeacherDB": "node ./scripts/populateTeacherDB.js"
   },
   "repository": {
