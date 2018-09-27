@@ -117,3 +117,71 @@ module.exports = router => {
       .then(() => res.json(postResponse));
   });
 };
+
+
+
+
+
+module.exports = router => {
+  router.post('/api/free-trial-request', bodyParse, async (req, res) => {
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).send('Bad Request: Request must include body');
+    }
+
+    const {
+      addressOne,
+      city,
+      state,
+      zip,
+      instrument,
+      musicStyle,
+      allergies,
+      specialNeeds,
+      comments,
+      experienceLevel,
+      availability,
+    } = req.body;
+
+    if (
+      !(
+        addressOne &&
+        city &&
+        state &&
+        zip &&
+        instrument &&
+        musicStyle &&
+        allergies &&
+        specialNeeds &&
+        comments &&
+        experienceLevel &&
+        availability &&
+        'hasInstrument' in req.body
+      )
+    ) {
+      return res
+        .status(400)
+        .send('Bad Request: Request body missing required properties');
+    }
+
+    const postResponse = {};
+
+    const studentAvailability = makeAvailability(availability);
+    let filteredTeachersArray = [];
+
+    try {
+
+      const student = await new Student(req.body).save();
+      postResponse.studentID = student._id;
+
+      const teachers = await Teacher.find({ instruments: { $in: [instrument] } }).lean()
+
+      if ()
+
+    } catch(err) {
+      console.log(err);
+      return res.status(500).send();
+    }
+
+  });
+};
