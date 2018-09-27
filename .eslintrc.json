@@ -44,6 +44,10 @@
           "_id"
         ]
       }
+    ],
+    "arrow-body-style": [
+      "error",
+      "always"
     ]
   }
 }

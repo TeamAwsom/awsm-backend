@@ -276,7 +276,9 @@ Teacher.insertMany(sampleTeachers)
     console.log('Sample teachers loaded into the DB');
     return teachers;
   })
-  .then(() => mongoose.disconnect())
+  .then(() => {
+    return mongoose.disconnect();
+  })
   .catch(err => {
     console.error(err);
     return mongoose.disconnect();
