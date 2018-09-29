@@ -1,6 +1,9 @@
+const superagent = require('superagent');
 const bodyParse = require('body-parser').json();
 const Student = require('./../schemas/student');
 const Teacher = require('./../schemas/teacher');
+
+const salesforceWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3148785/lt0i2d/'
 
 module.exports = router => {
   router.post('/api/confirm-appointment', bodyParse, async (req, res) => {
@@ -67,7 +70,20 @@ module.exports = router => {
 
       teacher.students.push(savedStudent);
 
-      await teacher.save();
+      const savedTeacher = await teacher.save();
+
+      try {
+        await superagent
+          .post(salesforceWebhookUrl)
+          .send({
+            teacher: savedTeacher,
+            student: savedStudent,
+            timeslot: timeslot
+          });
+      } catch(err) {
+        console.log('Error sending to Salesforce webhook:');
+        console.log(err);
+      }
 
       return res.status(200).send('Success');
 
