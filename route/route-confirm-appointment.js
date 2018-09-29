@@ -34,7 +34,7 @@ module.exports = router => {
         birthDate &&
         hearAbout &&
         teacherId &&
-        timeslot in req.body
+        timeslot
       )
     ) {
       return res
@@ -44,13 +44,13 @@ module.exports = router => {
 
     try {
 
-      const student = Student.findOne({_id: studentID});
+      const student = await Student.findOne({_id: studentID}).exec();
 
       if (!student) {
         return res.status(404).send('Student not found');
       }
 
-      const teacher = Teacher.findOne({_id: teacherId});
+      const teacher = await Teacher.findOne({_id: teacherId}).exec();
 
       if (!teacher) {
         return res.status(404).send('Teacher not found');
@@ -76,10 +76,11 @@ module.exports = router => {
         await superagent
           .post(salesforceWebhookUrl)
           .send({
-            teacher: savedTeacher,
-            student: savedStudent,
+            teacher: savedTeacher.toObject(),
+            student: savedStudent.toObject(),
             timeslot: timeslot
           });
+        console.log('POST sent to Salesforce webhook...');
       } catch(err) {
         console.log('Error sending to Salesforce webhook:');
         console.log(err);
