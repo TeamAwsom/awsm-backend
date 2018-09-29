@@ -50,7 +50,7 @@ describe('Testing free-trial-request route', () => {
       });
   });
 
-  xtest('Making a POST call with correct body will return correct response', () => {
+  test('Making a POST call with correct body will return correct response', () => {
     return request
       .post(`:${PORT}/api/free-trial-request`)
       .type('application/json')
