@@ -84,6 +84,7 @@ module.exports = router => {
       } catch(err) {
         console.log('Error sending to Salesforce webhook:');
         console.log(err);
+        return res.status(500).send('Server Error');
       }
 
       return res.status(200).send('Success');
