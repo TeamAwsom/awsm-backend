@@ -9,7 +9,6 @@ const createTimeSlot = require('./../lib/createTimeSlot');
 
 module.exports = router => {
   router.post('/api/free-trial-request', bodyParse, async (req, res) => {
-
     if (!Object.keys(req.body).length) {
       return res.status(400).send('Bad Request: Request must include body');
     }
@@ -44,7 +43,6 @@ module.exports = router => {
     }
 
     try {
-
       const postResponse = {};
       const studentAvailability = makeAvailability(availability);
 
@@ -52,23 +50,28 @@ module.exports = router => {
 
       postResponse.studentID = student._id;
 
-      const teachers = await Teacher.find({ instruments: { $in: [instrument] } }).lean()
+      const teachers = await Teacher.find({
+        instruments: { $in: [instrument] },
+      }).lean();
 
       if (!teachers.length) {
-        return res.status(200).send({ message: 'no matches found' })
+        return res.status(200).send({ message: 'no matches found' });
       }
 
-      const availableTeachers = filterTeachersByAvailability(studentAvailability, teachers)
+      const availableTeachers = filterTeachersByAvailability(
+        studentAvailability,
+        teachers
+      );
 
       if (!availableTeachers.length) {
-        return res.status(200).send({ message: 'no matches found' })
+        return res.status(200).send({ message: 'no matches found' });
       }
 
-      const studentAddress = createAddress(req.body)
+      const studentAddress = createAddress(req.body);
 
-      for (let teacher of availableTeachers) {
-        const teacherAddress = createAddress(teacher)
-        teacher.distance = await findDistance(teacherAddress, studentAddress)
+      for (const teacher of availableTeachers) {
+        const teacherAddress = createAddress(teacher);
+        teacher.distance = await findDistance(teacherAddress, studentAddress);
       }
 
       const sortedArray = availableTeachers.sort((a, b) => {
@@ -78,17 +81,15 @@ module.exports = router => {
         );
       });
 
-      // time slot logic still needs some work
-      postResponse.suggestedTimeSlots = sortedArray.slice(0, 3).map(teacher => {
-        return createTimeSlot(teacher, studentAvailability);
-      });
+      postResponse.suggestedTimeSlots = await createTimeSlot(
+        sortedArray.slice(0, 3),
+        studentAvailability
+      );
 
       return res.status(200).json(postResponse);
-
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       return res.status(500).send('Server Error');
     }
-
   });
 };
