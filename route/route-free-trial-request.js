@@ -81,11 +81,6 @@ module.exports = router => {
         );
       });
 
-      // time slot logic still needs some work
-      // postResponse.suggestedTimeSlots = sortedArray.slice(0, 3).map(teacher => {
-      //   return createTimeSlot(teacher, studentAvailability);
-      // });
-
       postResponse.suggestedTimeSlots = await createTimeSlot(
         sortedArray.slice(0, 3),
         studentAvailability
