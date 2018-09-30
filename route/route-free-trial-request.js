@@ -57,7 +57,7 @@ module.exports = router => {
       );
 
       if (!teachers.length) {
-        return res.status(200).send({ message: 'no matches found: instruments' });
+        return res.status(200).send({ message: 'no matches found' });
       }
 
       const availableTeachers = filterTeachersByAvailability(
@@ -66,7 +66,7 @@ module.exports = router => {
       );
 
       if (!availableTeachers.length) {
-        return res.status(200).send({ message: 'no matches found: available teachers' });
+        return res.status(200).send({ message: 'no matches found' });
       }
 
       const studentAddress = createAddress(req.body);
