@@ -1,9 +1,15 @@
 const superagent = require('superagent');
+const moment = require('moment');
 const bodyParse = require('body-parser').json();
 const Student = require('./../schemas/student');
 const Teacher = require('./../schemas/teacher');
 
 const salesforceWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3148785/lt0i2d/'
+
+function createTimeslotDate(day, time) {
+  let timeslotDate = moment().day(day).hour(time).minute(0)
+  return timeslotDate.format()
+}
 
 module.exports = router => {
   router.post('/api/confirm-appointment', bodyParse, async (req, res) => {
@@ -73,12 +79,18 @@ module.exports = router => {
       const savedTeacher = await teacher.save();
 
       try {
+        const timeslotDate = createTimeslotDate(
+          timeslot.time.day,
+          timeslot.time.hour
+        )
         await superagent
           .post(salesforceWebhookUrl)
           .send({
             teacher: savedTeacher.toObject(),
             student: savedStudent.toObject(),
-            timeslot: timeslot
+            timeslot: timeslot,
+            timeslotDate: timeslotDate,
+            timestamp: moment().format()
           });
         console.log('POST sent to Salesforce webhook...');
       } catch(err) {
