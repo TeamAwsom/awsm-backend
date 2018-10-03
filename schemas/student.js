@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const instruments = require('../instruments.json');
 
 const { Schema } = mongoose;
 
@@ -20,7 +21,7 @@ const studentSchema = Schema({
       toTime: { type: Number },
     },
   ],
-  instrument: { type: String, required: true },
+  instrument: { type: String, required: true, enum: instruments.list },
   hasInstrument: { type: Boolean, required: true },
   musicStyle: { type: String, required: true },
   allergies: { type: String },
