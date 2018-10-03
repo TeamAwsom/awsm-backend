@@ -47,7 +47,7 @@ module.exports = router => {
       const postResponse = {};
       const studentAvailability = makeAvailability(availability);
 
-      req.body.instrument.toUpperCase();
+      req.body.instrument = req.body.instrument.toUpperCase();
       const student = await new Student(req.body).save();
 
       postResponse.studentID = student._id;
