@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const instruments = require('../instruments.json');
 
 const { Schema } = mongoose;
 
@@ -11,7 +12,7 @@ const teacherSchema = Schema({
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: String, required: true },
-  instruments: [{ type: String }, { type: String }],
+  instruments: [{ type: String, enum: instruments.list }],
   availability: [
     {
       day: { type: String },

@@ -3,6 +3,7 @@ const Student = require('./../schemas/student');
 const Teacher = require('./../schemas/teacher');
 const makeAvailability = require('./../lib/makeAvailabilityObject');
 const filterTeachersByAvailability = require('./../lib/filterTeachersByAvailability');
+const filterTeachersByInstrument = require('./../lib/filterTeachersByInstrument');
 const createAddress = require('./../lib/createAddrString');
 const findDistance = require('./../lib/distanceMatrixAPI');
 const createTimeSlot = require('./../lib/createTimeSlot');
@@ -46,13 +47,15 @@ module.exports = router => {
       const postResponse = {};
       const studentAvailability = makeAvailability(availability);
 
+      req.body.instrument = req.body.instrument.toUpperCase();
       const student = await new Student(req.body).save();
 
       postResponse.studentID = student._id;
 
-      const teachers = await Teacher.find({
-        instruments: { $in: [instrument] },
-      }).lean();
+      const teachers = await filterTeachersByInstrument(
+        instrument,
+        Teacher
+      );
 
       if (!teachers.length) {
         return res.status(200).send({ message: 'no matches found' });
