@@ -148,15 +148,6 @@ describe('Testing the createTimeSlot.js file', () => {
           hour: 18,
         },
       },
-      {
-        name: 'Alex Bisky',
-        teacherID: '5ba55c051140f90357a3c34a',
-        email: 'rtnsjw@gmail.com',
-        time: {
-          day: 'monday',
-          hour: 18,
-        },
-      },
     ];
 
     const expected2 = [
