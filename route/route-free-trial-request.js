@@ -48,6 +48,7 @@ module.exports = router => {
       const studentAvailability = makeAvailability(availability);
 
       req.body.instrument = req.body.instrument.toUpperCase();
+      console.log(req.body.instrument);
       const student = await new Student(req.body).save();
 
       postResponse.studentID = student._id;
@@ -58,7 +59,7 @@ module.exports = router => {
       );
 
       if (!teachers.length) {
-        return res.status(200).send({ message: 'no matches found' });
+        return res.status(200).send({ message: 'no matches found: Instrument' });
       }
 
       const availableTeachers = filterTeachersByAvailability(
@@ -67,7 +68,7 @@ module.exports = router => {
       );
 
       if (!availableTeachers.length) {
-        return res.status(200).send({ message: 'no matches found' });
+        return res.status(200).send({ message: 'no matches found: Availability' });
       }
 
       const studentAddress = createAddress(req.body);
