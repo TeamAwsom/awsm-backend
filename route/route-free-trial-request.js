@@ -14,7 +14,7 @@ module.exports = router => {
       return res.status(400).send('Bad Request: Request must include body');
     }
 
-    const {
+    let {
       addressOne,
       city,
       state,
@@ -47,7 +47,7 @@ module.exports = router => {
       const postResponse = {};
       const studentAvailability = makeAvailability(availability);
 
-      req.body.instrument = req.body.instrument.toUpperCase();
+      instrument = req.body.instrument.toUpperCase();
       console.log(req.body.instrument);
       const student = await new Student(req.body).save();
 
