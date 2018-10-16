@@ -4,8 +4,6 @@ const bodyParse = require('body-parser').json();
 const Student = require('./../schemas/student');
 const Teacher = require('./../schemas/teacher');
 
-const salesforceWebhookUrl = 'https://hooks.zapier.com/hooks/catch/3148785/lt0i2d/'
-
 function createTimeslotDate(day, time) {
   let timeslotDate = moment().day(day).hour(time).minute(0)
   return timeslotDate.format()
@@ -84,7 +82,7 @@ module.exports = router => {
           timeslot.time.hour
         )
         await superagent
-          .post(salesforceWebhookUrl)
+          .post(process.env.SALES_FORCE_WEBHOOK)
           .send({
             teacher: savedTeacher.toObject(),
             student: savedStudent.toObject(),
