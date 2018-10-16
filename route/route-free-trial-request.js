@@ -4,8 +4,8 @@ const Teacher = require('./../schemas/teacher');
 const makeAvailability = require('./../lib/makeAvailabilityObject');
 const filterTeachersByAvailability = require('./../lib/filterTeachersByAvailability');
 const filterTeachersByInstrument = require('./../lib/filterTeachersByInstrument');
+const filterTeachersByDuration = require('./../lib/filterTeachersByDuration');
 const createAddress = require('./../lib/createAddrString');
-const findDistance = require('./../lib/distanceMatrixAPI');
 const createTimeSlot = require('./../lib/createTimeSlot');
 
 module.exports = router => {
@@ -62,7 +62,7 @@ module.exports = router => {
         return res.status(200).send({ message: 'no matches found: Instrument' });
       }
 
-      const availableTeachers = filterTeachersByAvailability(
+      const availableTeachers = await filterTeachersByAvailability(
         studentAvailability,
         teachers
       );
@@ -73,16 +73,10 @@ module.exports = router => {
 
       const studentAddress = createAddress(req.body);
 
-      for (const teacher of availableTeachers) {
-        const teacherAddress = createAddress(teacher);
-        teacher.distance = await findDistance(teacherAddress, studentAddress);
-        let seconds = teacher.distance.rows[0].elements[0].duration.value;
-        let minutes = seconds/60;
-        if(minutes > 30){
-          let index = availableTeachers.indexOf(teacher);
-          availableTeachers.splice(index,1);
-        }
-      }
+      await filterTeachersByDuration(
+        availableTeachers,
+        studentAddress
+      );
 
       if (!availableTeachers.length) {
         return res.status(200).send({ message: 'no matches found: Duration' });
