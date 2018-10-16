@@ -48,8 +48,7 @@ module.exports = router => {
       const studentAvailability = makeAvailability(availability);
 
       req.body.instrument = req.body.instrument.toUpperCase();
-      instrument = req.body.instrument
-      console.log(req.body.instrument);
+      instrument = req.body.instrument;
       const student = await new Student(req.body).save();
 
       postResponse.studentID = student._id;
@@ -77,12 +76,22 @@ module.exports = router => {
       for (const teacher of availableTeachers) {
         const teacherAddress = createAddress(teacher);
         teacher.distance = await findDistance(teacherAddress, studentAddress);
+        let seconds = teacher.distance.rows[0].elements[0].duration.value;
+        let minutes = seconds/60;
+        if(minutes > 30){
+          let index = availableTeachers.indexOf(teacher);
+          availableTeachers.splice(index,1);
+        }
+      }
+
+      if (!availableTeachers.length) {
+        return res.status(200).send({ message: 'no matches found: Duration' });
       }
 
       const sortedArray = availableTeachers.sort((a, b) => {
         return (
-          a.distance.rows[0].elements[0].distance.value -
-          b.distance.rows[0].elements[0].distance.value
+          a.distance.rows[0].elements[0].duration.value -
+          b.distance.rows[0].elements[0].duration.value
         );
       });
 

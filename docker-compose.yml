@@ -14,7 +14,7 @@ services:
     restart: always
     volumes:
       - .:/api/app
-      - /api/app/node_modules
+#      - /api/app/node_modules
     command: node_modules/.bin/nodemon index.js
     ports:
       - "3000:3000"
